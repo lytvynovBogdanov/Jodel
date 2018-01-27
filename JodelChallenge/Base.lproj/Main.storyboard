@@ -45,11 +45,20 @@
                         </connections>
                     </collectionView>
                     <tabBarItem key="tabBarItem" title="Item" id="q7C-rv-ccb"/>
-                    <navigationItem key="navigationItem" id="kAv-bW-qrL"/>
+                    <navigationItem key="navigationItem" id="kAv-bW-qrL">
+                        <barButtonItem key="rightBarButtonItem" image="update" id="KZL-tW-5r1">
+                            <connections>
+                                <action selector="updateClicked:" destination="GZw-80-Ba9" id="hJ6-jb-Krq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Rh-DI-kkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="802" y="0.0"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="update" width="25" height="25"/>
+    </resources>
 </document>

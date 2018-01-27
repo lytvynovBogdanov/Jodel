@@ -18,6 +18,9 @@ class FeedPicturesCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         feedPicturesDataSource.registerCell(self.collectionView!)
+        feedPicturesFlosLayout.didSelectCell = { (cell: UICollectionViewCell) in
+            print("select select select")
+        }
         self.collectionView?.dataSource = feedPicturesDataSource
         self.collectionView?.delegate = feedPicturesFlosLayout
         
@@ -41,7 +44,10 @@ class FeedPicturesCollectionViewController: UICollectionViewController {
         }
     }
 
-//    override func didReceiveMemoryWarning() {
+    @IBAction func updateClicked(_ sender: UIBarButtonItem) {
+        loadData()
+    }
+    //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()
 //        // Dispose of any resources that can be recreated.
 //    }
@@ -91,10 +97,6 @@ class FeedPicturesCollectionViewController: UICollectionViewController {
     
     }
     */
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("select")
-    }
+    
     
 }
-
-
