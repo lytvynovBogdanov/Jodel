@@ -7,27 +7,38 @@
 //
 
 import UIKit
-import FlickrApi
-
-private let feedPicturesDataSource = FeedPicturesDataSource()
+import FlickrKit
 
 class FeedPicturesCollectionViewController: UICollectionViewController {
 
+    private let feedPicturesDataSource = FeedPicturesDataSource()
+    private let feedPicturesFlosLayout = FeedPicturesFlowLayout()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView?.dataSource = feedPicturesDataSource;
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: feedPicturesDataSource.cellIdentifier)
+        
+        feedPicturesDataSource.registerCell(self.collectionView!)
+        self.collectionView?.dataSource = feedPicturesDataSource
+        self.collectionView?.delegate = feedPicturesFlosLayout
+        
+        self.loadData()
     }
     
     private func loadData() {
-        FlickrApi
-        [FlickrApi fetchPhotosWithCompletion:^(NSArray *photos, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-            });
-            self.photos = photos;
-            NSLog(@"result %@ error %@", photos, error);
-            }];
+        FlickrApi.fetchPhotos { (photos:[Any]?, error: Error?) in
+            if let error = error {
+                self.presentErrorView(title: "Error", textMessage: error.localizedDescription, style: .alert)
+                return
+            }
+            
+            if let photos = photos as? [URL] {
+                self.feedPicturesDataSource.photos = photos
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadData()
+                }
+            }
+            
+        }
     }
 
 //    override func didReceiveMemoryWarning() {
@@ -80,5 +91,10 @@ class FeedPicturesCollectionViewController: UICollectionViewController {
     
     }
     */
-
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("select")
+    }
+    
 }
+
+
