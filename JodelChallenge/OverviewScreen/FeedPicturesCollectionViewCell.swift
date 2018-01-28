@@ -14,6 +14,6 @@ class FeedPicturesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var fullImageView: UIImageView!
     
     func configure(withURL url: URL) {
-        self.fullImageView.setImageWith(url)
+        self.fullImageView.setImage(url: url)
     }
 }

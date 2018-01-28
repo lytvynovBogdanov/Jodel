@@ -8,6 +8,7 @@
 
 import UIKit
 import FlickrKit
+import SVProgressHUD
 
 class FeedPicturesCollectionViewController: UICollectionViewController {
 
@@ -28,7 +29,9 @@ class FeedPicturesCollectionViewController: UICollectionViewController {
     }
     
     private func loadData() {
+        SVProgressHUD.show(withStatus: "Loading...")
         FlickrApi.fetchPhotos { (photos:[Any]?, error: Error?) in
+            SVProgressHUD.dismiss()
             if let error = error {
                 self.presentErrorView(title: "Error", textMessage: error.localizedDescription, style: .alert)
                 return
@@ -47,10 +50,11 @@ class FeedPicturesCollectionViewController: UICollectionViewController {
     @IBAction func updateClicked(_ sender: UIBarButtonItem) {
         loadData()
     }
-    //    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        ImageWorker.shared.resetCache()
+    }
 
     /*
     // MARK: - Navigation

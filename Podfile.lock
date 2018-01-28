@@ -15,15 +15,18 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - FlickrKit (1.0.9)
+  - SVProgressHUD (2.2.2)
 
 DEPENDENCIES:
   - AFNetworking
   - FlickrKit
+  - SVProgressHUD
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   FlickrKit: 79ffaf64a12293ba2b1aa8a2e53a4958cb113256
+  SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
 
-PODFILE CHECKSUM: d147a853118b5ff1f93d9f402799ba6c2793fb1b
+PODFILE CHECKSUM: ac3c41ad7c720b78d6c191cc545f6b2169dc9408
 
 COCOAPODS: 1.3.1
