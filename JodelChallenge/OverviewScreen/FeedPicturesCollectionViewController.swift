@@ -18,9 +18,10 @@ class FeedPicturesCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Images"
         feedPicturesDataSource.registerCell(self.collectionView!)
-        feedPicturesFlosLayout.didSelectCell = { (cell: UICollectionViewCell) in
-            print("select select select")
+        feedPicturesFlosLayout.didSelectCell = {[unowned self] (title: String?, image: UIImage?) in
+            self.presentFullImageViewController(title, image)
         }
         self.collectionView?.dataSource = feedPicturesDataSource
         self.collectionView?.delegate = feedPicturesFlosLayout
@@ -38,7 +39,7 @@ class FeedPicturesCollectionViewController: UICollectionViewController {
             }
             
             if let photos = photos as? [URL] {
-                self.feedPicturesDataSource.photos = photos
+                self.feedPicturesDataSource.photoViewModel = PhotoViewModel(urls: photos)
                 DispatchQueue.main.async {
                     self.collectionView?.reloadData()
                 }
@@ -51,11 +52,15 @@ class FeedPicturesCollectionViewController: UICollectionViewController {
         loadData()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        ImageWorker.shared.resetCache()
+    private func presentFullImageViewController(_ title: String?,  _ image: UIImage?) {
+        let fullImageVC = FullImageViewController(nibName: String(describing: FullImageViewController.self), bundle: nil)
+        
+        fullImageVC.imageToShow = image
+        fullImageVC.title = title
+        self.navigationController?.pushViewController(fullImageVC, animated: true)
     }
-
+    
+    
     /*
     // MARK: - Navigation
 

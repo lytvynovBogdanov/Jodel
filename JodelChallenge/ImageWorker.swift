@@ -10,8 +10,7 @@ import UIKit
 
 typealias ImageHandler = (_ image:UIImage) -> Void
 
-private class ImageCache
-{
+private class ImageCache {
     var images = [String:UIImage]()
     
     func setImage(image: UIImage, forKey key: String) {
@@ -27,8 +26,16 @@ private class ImageCache
     }
 }
 
-class ImageWorker
-{
+class ImageWorker {
+    
+    init() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.resetCache),
+            name: NSNotification.Name.UIApplicationDidReceiveMemoryWarning,
+            object: nil)
+    }
+    
     private let imageCache:ImageCache = ImageCache()
  
     static let shared:ImageWorker = ImageWorker()
@@ -39,7 +46,11 @@ class ImageWorker
         return image
     }
     
-    func resetCache() {
+    @objc func resetCache() {
         imageCache.removeAll()
+    }
+    
+    func deallooc() {
+        NotificationCenter.default.removeObserver(self)
     }
 }

@@ -11,9 +11,11 @@ import AFNetworking
 
 class FeedPicturesCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var fullImageView: UIImageView!
     
-    func configure(withURL url: URL) {
+    func configure(title: String, url: URL) {
+        self.titleLabel.text = title
         self.fullImageView.setImage(url: url)
     }
 }
