@@ -13,6 +13,6 @@ struct PhotoViewModel {
     var photos: [Photo]
     
     init(urls:[URL]) {
-        self.photos = urls.enumerated().map({ Photo(index: $0, url: $1) })
+        self.photos = urls.enumerated().map({ Photo(index: ($0 + 1), url: $1) })
     }
 }

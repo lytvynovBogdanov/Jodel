@@ -2,14 +2,13 @@
 //  JodelChallengeTests.swift
 //  JodelChallengeTests
 //
-//  Created by Michal Ciurus on 21/09/2017.
-//  Copyright © 2017 Jodel. All rights reserved.
+//  Created by Lesha on 29.01.2018.
+//  Copyright © 2018 Jodel. All rights reserved.
 //
 
 import XCTest
-@testable import JodelChallenge
 
-class JodelChallengeTests: XCTestCase {
+class PhotoViewModelTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -21,9 +20,13 @@ class JodelChallengeTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testInit() {
+        var photoViewModel = PhotoViewModel(urls: [])
+        XCTAssertEqual(photoViewModel.photos.count, 0)
+        if let url = URL(string: "https://github.com/Jodel/Jodel-iOS-Challenge/raw/master/jodellogo.png") {
+            photoViewModel = PhotoViewModel(urls: [url])
+            XCTAssertEqual(photoViewModel.photos.count, 1)
+        }
     }
     
     func testPerformanceExample() {
