@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedPicturesDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class FeedPicturesDataSource: NSObject, UICollectionViewDataSource {
     
     let cellIdentifier = String(describing: FeedPicturesCollectionViewCell.self)
     var photoViewModel = PhotoViewModel(urls: [])

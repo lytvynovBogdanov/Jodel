@@ -24,5 +24,5 @@ class FullImageViewController: UIViewController {
 extension FullImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView;
-    }
+    }    
 }
