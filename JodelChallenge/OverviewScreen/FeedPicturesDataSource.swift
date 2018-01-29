@@ -11,7 +11,7 @@ import UIKit
 class FeedPicturesDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let cellIdentifier = String(describing: FeedPicturesCollectionViewCell.self)
-    var photos = [URL]()
+    var photoViewModel = PhotoViewModel(urls: [])
     
     func registerCell(_ collectionView: UICollectionView) {
         let nib = UINib(nibName: cellIdentifier, bundle: nil)
@@ -19,12 +19,13 @@ class FeedPicturesDataSource: NSObject, UICollectionViewDataSource, UICollection
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        return photoViewModel.photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! FeedPicturesCollectionViewCell
-        cell.configure(withURL: photos[indexPath.row])
+        let photo = photoViewModel.photos[indexPath.row]
+        cell.configure(title: photo.title, url: photo.url)
         
         return cell
     }
